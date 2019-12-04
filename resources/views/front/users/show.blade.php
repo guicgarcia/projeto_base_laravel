@@ -11,34 +11,34 @@
             <div class="p-2">
                 <span class="d-none d-md-block">
                     <a href="{{ route('admin.users.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
-                    <a href="{{ route('admin.users.edit', [1]) }}" class="btn btn-outline-warning btn-sm">Editar</a>
-                    <a href="{{ route('admin.users.destroy', [1]) }}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                    <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                    <a href="{{ route('admin.users.destroy', ['user' => $user->id]) }}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                 </span>
                 <div class="dropdown d-block d-md-none">
                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Ações
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">                                    
-                        <a class="dropdown-item" href="{{ route('admin.users.index', [1]) }}">Listar</a>
-                        <a class="dropdown-item" href="{{ route('admin.users.edit', [1]) }}">Editar</a>
-                        <a class="dropdown-item" href="{{ route('admin.users.destroy', [1]) }}" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                        <a class="dropdown-item" href="{{ route('admin.users.index') }}">Listar</a>
+                        <a class="dropdown-item" href="{{ route('admin.users.edit', ['user' => $user->id]) }}">Editar</a>
+                        <a class="dropdown-item" href="{{ route('admin.users.destroy', ['user' => $user->id]) }}" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                     </div>
                 </div>
             </div>
         </div><hr>
         <dl class="row">
             <dt class="col-sm-3">ID</dt>
-            <dd class="col-sm-9">1</dd>
+            <dd class="col-sm-9">{{ $user->id }}</dd>
 
             <dt class="col-sm-3">Nome</dt>
-            <dd class="col-sm-9">Guilherme
+            <dd class="col-sm-9">{{ $user->name }}
             </dd>
 
             <dt class="col-sm-3">E-mail</dt>
-            <dd class="col-sm-9">gui@email.com.br</dd>
+            <dd class="col-sm-9">{{ $user->email }}</dd>
 
             <dt class="col-sm-3 text-truncate">Data do Cadastro</dt>
-            <dd class="col-sm-9">02/12/2019 16:44:39</dd>
+            <dd class="col-sm-9">{{ $user->created_at }}</dd>
 
         </dl>
     </div>

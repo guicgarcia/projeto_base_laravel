@@ -14,12 +14,9 @@
                     </div>
                 </a>
             </div>
-            <div class="alert alert-success" role="alert">
-                Usuário apagado com sucesso!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+
+            @include('flash::message')
+
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
@@ -32,29 +29,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Guilherme</td>
-                            <td class="d-none d-sm-table-cell">gui@email.com</td>
-                            <td class="d-none d-lg-table-cell">02/12/2019 17:13:39</td>
-                            <td class="text-center">
-                                <span class="d-none d-md-block">
-                                    <a href="{{ route('admin.users.show', [1]) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
-                                    <a href="{{ route('admin.users.edit', [1]) }}" class="btn btn-outline-warning btn-sm">Editar</a>
-                                    <a href="{{ route('admin.users.destroy', [1]) }}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
-                                </span>
-                                <div class="dropdown d-block d-md-none">
-                                    <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Ações
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                                        <a class="dropdown-item" href="{{ route('admin.users.show', [1]) }}">Visualizar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.users.edit', [1]) }}">Editar</a>
-                                        <a class="dropdown-item" href="{{ route('admin.users.destroy', [1]) }}" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                    @if(!empty($users))
+                        @foreach ($users as $user)    
+                            <tr>
+                                <th>{{ $user->id }}</th>
+                                <td>{{ $user->name }}</td>
+                                <td class="d-none d-sm-table-cell">{{ $user->email }}</td>
+                                <td class="d-none d-lg-table-cell">{{ $user->created_at }}</td>
+                                <td class="text-center">
+                                    <span class="d-none d-md-block">
+                                        <a href="{{ route('admin.users.show', ['user' => $user->id]) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                        <a href="{{ route('admin.users.edit', ['user' => $user->id]) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                        <a href="{{ route('admin.users.destroy', ['user' => $user->id]) }}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                                    </span>
+                                    <div class="dropdown d-block d-md-none">
+                                        <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Ações
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
+                                            <a class="dropdown-item" href="{{ route('admin.users.show', ['user' => $user->id]) }}">Visualizar</a>
+                                            <a class="dropdown-item" href="{{ route('admin.users.edit', ['user' => $user->id]) }}">Editar</a>
+                                            <a class="dropdown-item" href="{{ route('admin.users.destroy', ['user' => $user->id]) }}" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
 
@@ -95,7 +96,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger">Apagar</button>
+                <form action="{{ route('admin.users.destroy', ['user' => $user->id]) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <input type="submit" class="btn btn-danger" value="Apagar">
+                </form>
             </div>
         </div>
     </div>

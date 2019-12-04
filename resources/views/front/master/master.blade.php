@@ -24,7 +24,7 @@
     @include('front.includes.header')
     
     @include('front.includes.menu')
-    
+
     @yield('content')
 
     @include('front.includes.footer')

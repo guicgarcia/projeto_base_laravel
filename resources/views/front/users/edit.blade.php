@@ -11,8 +11,8 @@
             <div class="p-2">
                 <span class="d-none d-md-block">
                     <a href="{{ route('admin.users.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
-                    <a href="{{ route('admin.users.show', [1]) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
-                    <a href="{{ route('admin.users.destroy', ['']) }}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                    <a href="{{ route('admin.users.show', ['user' => $user->id]) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                    <a href="{{ route('admin.users.destroy', ['user' => $user->id]) }}" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                 </span>
                 <div class="dropdown d-block d-md-none">
                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,71 +20,47 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">                                    
                         <a class="dropdown-item" href="{{ route('admin.users.index') }}">Listar</a>
-                        <a class="dropdown-item" href="{{ route('admin.users.show' , [1]) }}>Visualizar</a>
-                        <a class="dropdown-item" href="{{ route('admin.users.destroy', [1]) }}" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
+                        <a class="dropdown-item" href="{{ route('admin.users.show' , ['user' => $user->id]) }}>Visualizar</a>
+                        <a class="dropdown-item" href="{{ route('admin.users.destroy', ['user' => $user->id]) }}" data-toggle="modal" data-target="#apagarRegistro">Apagar</a>
                     </div>
                 </div>
             </div>
-        </div><hr>
-        <form>
+        </div>
+
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-danger" role="alert">
+                {{ $error }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endforeach
+
+        <form action="{{ route('admin.users.update', ['user' => $user->id]) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <input type="hidden" name="id" value="{{ $user->id }}">
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label><span class="text-danger">*</span> Nome</label>
-                    <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome completo">
+                    <input name="name" type="text" class="form-control" id="nome" placeholder="Nome completo" value="{{ old('name') ?? $user->name }}">
+                </div>
+                <div class="form-group col-md-6">
+                    <label><span class="text-danger">*</span> Username</label>
+                    <input name="username" type="text" class="form-control" id="username" placeholder="Nome do usuário" value="{{ old('username') ?? $user->username }}">
                 </div>
                 <div class="form-group col-md-6">
                     <label><span class="text-danger">*</span> E-mail</label>
-                    <input name="email" type="email" class="form-control" id="email" placeholder="Seu melhor e-mail">
+                    <input name="email" type="email" class="form-control" id="email" placeholder="Seu melhor e-mail" value="{{ old('email') ?? $user->email }}">
                 </div>
-            </div>
-            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Senha</label>
-                    <input name="senha" type="password" class="form-control" id="senha" placeholder="Senha com mínimo 6 caracteres">
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Confirma Senha</label>
-                    <input name="conf_senha" type="password" class="form-control" id="conf_senha" placeholder="Confirma a senha">
+                    <input name="password" type="password" class="form-control" id="senha" placeholder="Senha com mínimo 3 caracteres">
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Endereço</label>
-                    <input name="endereco" type="text" class="form-control" id="endereco" placeholder="Rua João...">
-                </div>
-                <div class="form-group col-md-2">
-                    <label>Número</label>
-                    <input name="numero" type="text" class="form-control" id="numero" placeholder="123">
-                </div>
-                <div class="form-group col-md-4">
-                    <label>Complemento</label>
-                    <input name="complemento" type="text" class="form-control" id="complemento" placeholder="Sala, Apartamento...">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-5">
-                    <label>Estado</label>
-                    <select name="estado" id="estado" class="form-control">
-                        <option selected>Selecione</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-5">
-                    <label>Cidade</label>
-                    <select name="cidade" id="cidade" class="form-control">
-                        <option selected>Selecione</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label>CEP</label>
-                    <input name="cep" type="text" class="form-control" id="cep" placeholder="12345-678">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Exemplo 1</label>
-                <input name="exemplo_1" type="text" class="form-control" id="exemplo_1" placeholder="Exemplo 1">
-            </div>
+
             <p>
                 <span class="text-danger">* </span>Campo obrigatório
             </p>

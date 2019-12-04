@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User as UserRequest;
 
 class UserController extends Controller
 {
@@ -14,9 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
+        $users = User::all();
         return view('front.users.index', [
-
+            'users' => $users
         ]);
+
+
     }
 
     /**
@@ -37,7 +42,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userCreate = User::Create($request->all());
+        flash('Usuário cadastrado com sucesso')->success()->important();
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -48,7 +55,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('front.users.show');
+        $user = User::where('id', $id)->first();
+        return view('front.users.show', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -59,7 +69,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('front.users.edit');
+        $user = User::where('id', $id)->first();
+        return view('front.users.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -69,9 +82,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $user = User::where('id', $id)->first();
+        $user->fill($request->all());
+
+        if(!$user->save()){
+            return redirect()->back()->withInputs()->withErrors();
+        }
+
+        flash('Usuário editado com sucesso')->success()->important();
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -80,8 +101,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        flash('Usuário apagado com sucesso')->error()->important();
+        return redirect()->route('admin.users.index');
     }
 }
