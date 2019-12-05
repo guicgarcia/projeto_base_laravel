@@ -1,7 +1,7 @@
 <div class="d-flex">
     <nav class="sidebar">
         <ul class="list-unstyled">
-            <li><a href="{{ route('home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="{{ route('admin.home') }}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li>
                 <a href="#submenu1" data-toggle="collapse">
                     <i class="fas fa-user"></i> Usuário

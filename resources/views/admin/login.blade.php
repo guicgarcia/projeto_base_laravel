@@ -7,6 +7,8 @@
 
     <meta name="author" content="freehtml5.co"/>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Login</title>
     
     <link rel="icon" href="">
@@ -18,21 +20,25 @@
 </head>
 <body>
 
+	<div class="ajax_response"></div>
+
 	<div class="body-login">
-		<form class="form-signin">
-		    <img class="mb-4" src="" alt="Login" width="72" height="72">
-		    <h1 class="h3 mb-3 font-weight-normal">Área Restrita</h1>
+		<form class="form-signin" name="login" action="{{ route('admin.login.do') }}" method="post" autocomplete="off">
+		    <div class="text-center">
+		    	<img class="mb-4" src="imagens/logo.png" alt="Login" width="72" height="72">
+		    	<h1 class="h3 mb-3 font-weight-normal">Área Restrita</h1>
+			</div>
 
 		    <div class="form-group">
 		        <label>Usuário</label>
-		        <input type="text" class="form-control" placeholder="Digite o usuário">               
+		        <input name="username" type="text" class="form-control" placeholder="Digite o usuário" required/> 
 		    </div>
 		    <div class="form-group">
 		        <label>Senha</label>
-		        <input type="password" class="form-control" placeholder="Digite a senha">
+		        <input name="password" type="password" class="form-control" placeholder="Digite a senha">
 		    </div>
 		    <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
-		    <p class="text-center">Esqueceu a senha?</p>
+		    <a href="#"><p class="text-center">Esqueceu a senha?</p></a>
 		</form>
 	</div>
 
@@ -45,6 +51,8 @@
 <script src="{{ url('js/jquery.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="{{ url('js/bootstrap.min.js') }}"></script>
+<script src="{{ url('js/login.js') }}"></script>
+<script src="{{ url('js/scripts.js') }}"></script>
 
 </body>
 </html>

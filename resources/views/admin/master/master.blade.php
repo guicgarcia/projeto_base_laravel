@@ -7,6 +7,8 @@
 
     <meta name="author" content="freehtml5.co"/>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Login</title>
     
     <link rel="icon" href="">
