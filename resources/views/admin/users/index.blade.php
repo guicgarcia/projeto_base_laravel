@@ -1,4 +1,4 @@
-@extends('front.master.master')
+@extends('admin.master.master')
 
 @section('content')
 
@@ -61,19 +61,7 @@
 
                 <nav aria-label="paginacao">
                   <ul class="pagination pagination-sm justify-content-center">
-                    <li class="page-item disabled">
-                      <span class="page-link">Primeira</span>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item active" aria-current="page">
-                      <span class="page-link">
-                        2
-                      </span>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">Última</a>
-                    </li>
+                        {{ $users->links() }}
                   </ul>
                 </nav>
 

@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User as UserRequest;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -16,12 +17,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('front.users.index', [
+        $users = User::paginate(4);
+        return view('admin.users.index', [
             'users' => $users
         ]);
-
-
     }
 
     /**
@@ -31,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('front.users.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -40,9 +39,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $userCreate = User::Create($request->all());
+        
         flash('Usuário cadastrado com sucesso')->success()->important();
         return redirect()->route('admin.users.index');
     }
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::where('id', $id)->first();
-        return view('front.users.show', [
+        return view('admin.users.show', [
             'user' => $user
         ]);
     }
@@ -70,7 +70,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-        return view('front.users.edit', [
+        return view('admin.users.edit', [
             'user' => $user
         ]);
     }
@@ -104,7 +104,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        flash('Usuário apagado com sucesso')->error()->important();
+        flash('Usuário apagado com sucesso')->success()->important();
         return redirect()->route('admin.users.index');
     }
 }

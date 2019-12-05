@@ -1,4 +1,4 @@
-@extends('front.master.master')
+@extends('admin.master.master')
 
 @section('content')
 
@@ -17,13 +17,14 @@
             </a>
         </div><hr>
 
-        @if ($errors->all())
-            @foreach($errors->all() as $error)
-                @message(['color' => 'orange'])
-                    <p class="icon-asterisk">{{ $error }}</p>
-                @endmessage
-            @endforeach
-        @endif
+        @foreach ($errors->all() as $error)
+                <div class="alert alert-danger" role="alert">
+                    {{ $error }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+        @endforeach
 
         <form action="{{ route('admin.users.store') }}" method="post" enctype="multipart/form-data">
             @csrf

@@ -21,13 +21,13 @@
 <div class="fh5co-loader"></div>
 
 <div id="page">
-    @include('front.includes.header')
+    @include('admin.includes.header')
     
-    @include('front.includes.menu')
+    @include('admin.includes.menu')
 
     @yield('content')
 
-    @include('front.includes.footer')
+    @include('admin.includes.footer')
 </div>
 
 <div class="gototop js-top">
