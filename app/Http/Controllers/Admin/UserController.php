@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User as UserRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->except('register');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -106,5 +112,10 @@ class UserController extends Controller
         $user->delete();
         flash('Usuário apagado com sucesso')->success()->important();
         return redirect()->route('admin.users.index');
+    }
+
+    public function register()
+    {
+        return view('admin.users.register');
     }
 }

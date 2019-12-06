@@ -23,13 +23,13 @@ class AuthController extends Controller
     		return response()->json($json);
     	}
     	
-    	if(!filter_var($request->username, FILTER_VALIDATE_EMAIL)) {
+    	if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)) {
             $json['message'] = $this->message->error('Informe um e-mail válido.')->render();
             return response()->json($json);
         }
 
         $credentials = [
-            'username' => $request->username,
+            'email' => $request->email,
             'password' => $request->password
         ];
 

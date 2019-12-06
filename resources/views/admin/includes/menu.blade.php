@@ -19,10 +19,6 @@
                 </ul>
 
             </li>
-            <li><a href="#"> Item 1</a></li>
-            <li><a href="#"> Item 2</a></li>
-            <li><a href="#"> Item 3</a></li>
-            <li class="active"><a href="#"> Item 4</a></li>
             <li><a href="#"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
         </ul>
     </nav>

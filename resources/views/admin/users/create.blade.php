@@ -35,10 +35,6 @@
                     <input name="name" type="text" class="form-control" id="nome" placeholder="Nome completo" value="{{ old('name') }}"/>
                 </div>
                 <div class="form-group col-md-6">
-                    <label><span class="text-danger">*</span> Username</label>
-                    <input name="username" type="text" class="form-control" id="username" placeholder="Nome do usuário" value="{{ old('username') }}">
-                </div>
-                <div class="form-group col-md-6">
                     <label><span class="text-danger">*</span> E-mail</label>
                     <input name="email" type="email" class="form-control" id="email" placeholder="Seu melhor e-mail" value="{{ old('email') }}">
                 </div>
@@ -46,6 +42,17 @@
                     <label>Senha</label>
                     <input name="password" type="password" class="form-control" id="senha" placeholder="Senha com mínimo 6 caracteres">
                 </div>
+                
+                <div class="form-group col-md-6">
+                    <label class="label">
+                        <span class="legend">*Nível de acesso:</span>
+                        <select class="form-control" name="nivel_acesso">
+                            <option value="1" {{ old('nivel_acesso') == '1' ? 'selected' : '' }}> Administrador</option>
+                            <option value="2" {{ old('nivel_acesso') == '2' ? 'selected' : '' }}> Usuário</option>
+                        </select>
+                    </label>
+                </div>
+
             </div>
         
             <p>

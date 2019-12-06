@@ -11,12 +11,12 @@ $('form[name="login"]').submit(function(event){
 
 	const form = $(this);
 	const action = form.attr('action');
-	const username = form.find('input[name="username"]').val();
+	const email = form.find('input[name="email"]').val();
 	const password = form.find('input[name="password"]').val();
 
-	console.log(action, username, password);
+	console.log(action, email, password);
 
-	$.post(action, {username: username, password: password}, function (response) {
+	$.post(action, {email: email, password: password}, function (response) {
 		if (response.message) {
 			//alert('Mensagem de erro da controller' + response.message);
 			ajaxMessage(response.message, 3);

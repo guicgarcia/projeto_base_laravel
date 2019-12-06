@@ -23,22 +23,20 @@
 	<div class="ajax_response"></div>
 
 	<div class="body-login">
-		<form class="form-signin" name="login" action="{{ route('admin.login.do') }}" method="post" autocomplete="off">
+		<form class="form-signin" name="login" action="{{ route('admin.register') }}" method="post" autocomplete="off">
 		    <div class="text-center">
-		    	<img class="mb-4" src="http://localhost/laravel_base_novo/public/imagens/logo.png" alt="Login" width="72" height="72">
-		    	<h1 class="h3 mb-3 font-weight-normal">Área Restrita</h1>
+		    	<h1 class="h3 mb-3 font-weight-normal">Cadastar Usuário</h1>
 			</div>
 
 		    <div class="form-group">
-		        <label>Email</label>
-		        <input name="email" type="text" class="form-control" placeholder="Digite o seu melhor e-mail" required/> 
+		        <label>Usuário</label>
+		        <input name="username" type="text" class="form-control" placeholder="Digite o usuário" required/> 
 		    </div>
 		    <div class="form-group">
 		        <label>Senha</label>
 		        <input name="password" type="password" class="form-control" placeholder="Digite a senha">
 		    </div>
-		    <button class="btn btn-lg btn-primary btn-block" type="submit">Acessar</button>
-		    <a href="#"><p class="text-center">Esqueceu a senha?</p></a>
+		    <button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
 		</form>
 	</div>
 

@@ -26,8 +26,7 @@ class User extends FormRequest
         return [
             'name' => 'required|min:3|max:191',
             'email' => (!empty($this->request->all()['id']) ? 'required|email|unique:users,email,' . $this->request->all()['id'] : 'required|email|unique:users,email'),
-            'password' => 'required|min:3|max:191',
-            'username' => 'required|min:3|max:191'
+            'password' => 'required|min:3|max:191'
         ];
     }
 }
