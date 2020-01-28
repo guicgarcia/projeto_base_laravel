@@ -11,17 +11,22 @@
 |
 */
 
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function(){
 
 	/** Formulário de Login */
 	Route::get('/login', 'AuthController@showLoginForm')->name('login');
-	Route::post('login', 'AuthController@login')->name('login.do');
+	Route::post('/login', 'AuthController@login')->name('login.do');
+
+	/** Logout */
+    Route::get('logout', 'AuthController@logout')->name('logout');
+     Route::get('block', 'AuthController@blockAccess')->name('blockAccess');
+    
+    /** Cadastro público */
+	Route::get('cadastrar', 'UserController@register')->name('register');
 
 	/** Rotas protegidas */
 	/**-------------------------------------------------------------------------*/
@@ -30,12 +35,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
 
 		/** Usuários */
 		Route::resource('users', 'UserController');
+
+		/** Categoria Imagem */
+		Route::resource('cat-imagem', 'CatImagemController');
+
+		/** Imagens */
+		Route::resource('imagens', 'ImagemController');
 	/**-------------------------------------------------------------------------*/
-
-	/** Logout */
-    Route::get('logout', 'AuthController@logout')->name('logout');
-
-    /** Cadastro público */
-	Route::get('cadastrar', 'UserController@register')->name('register');
 
 });

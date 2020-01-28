@@ -8,7 +8,8 @@
                 </a>
                 <ul id="submenu1" class="list-unstyled collapse">
                     <li><a href="{{ route('admin.users.index') }}"><i class="fas fa-users"></i> Usuários</a></li>
-                    <li><a href="#"><i class="fas fa-key"></i> Nível de Acesso</a></li>
+                    <li><a href="{{ route('admin.cat-imagem.index') }}"><i class="fas fa-list-ol"></i> Categoria Imagem</a></li>
+                    <li><a href="{{ route('admin.imagens.index') }}"><i class="fas fa-list-ol"></i> Imagem</a></li>
                 </ul>
             </li>
             <li>

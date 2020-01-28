@@ -29,6 +29,8 @@
 		    	<h1 class="h3 mb-3 font-weight-normal">Área Restrita</h1>
 			</div>
 
+			@include('flash::message') 
+
 		    <div class="form-group">
 		        <label>Email</label>
 		        <input name="email" type="text" class="form-control" placeholder="Digite o seu melhor e-mail" required/> 

@@ -11,9 +11,10 @@ class AuthController extends Controller
 {
 	public function showLoginForm()
     {
-        return view('admin.login', [
-            
-        ]);
+        if(Auth::check() === true) {
+            return view('admin.home');
+        }
+        return view('admin.login');
     }
 
     public function login(Request $request)
@@ -45,6 +46,13 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
+        return redirect()->route('admin.login');
+    }
+
+    public function blockAccess()
+    {
+        Auth::logout();
+        flash('Página reservada para administradores')->error()->important();
         return redirect()->route('admin.login');
     }
 }
