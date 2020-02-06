@@ -33,9 +33,9 @@
                         @foreach ($imagens as $imagem)    
                             <tr>
                                 <th>{{ $imagem->id }}</th>
-                                <td>]
+                                <td>
                                      <div class="">
-                                        <img src="" alt="">
+                                        <img src="{{ env('APP_URL') }}/storage/{{ $imagem->imagem }}" alt="" width="100" height="80">
                                     </div>
                                 </td>
                                 <td class="d-none d-sm-table-cell">{{ $imagem->cats_imagem_id }}</td>
@@ -74,28 +74,30 @@
     </div>
 </div>
 
-<div class="modal fade" id="apagarRegistro" tabindex="-1" role="dialog" aria-labelledby="apagarRegistroLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="exampleModalLabel">EXCLUIR ITEM</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Tem certeza de que deseja excluir o item selecionado?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-                <form action="{{ route('admin.imagens.destroy', ['imagen' => $imagem->id]) }}" method="post">
-                    @csrf
-                    @method('delete')
-                    <input type="submit" class="btn btn-danger" value="Apagar">
-                </form>
+@if(!empty($imagem))
+    <div class="modal fade" id="apagarRegistro" tabindex="-1" role="dialog" aria-labelledby="apagarRegistroLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="exampleModalLabel">EXCLUIR ITEM</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Tem certeza de que deseja excluir o item selecionado?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                    <form action="{{ route('admin.imagens.destroy', ['imagen' => $imagem->id]) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" class="btn btn-danger" value="Apagar">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endif
 
 @endsection

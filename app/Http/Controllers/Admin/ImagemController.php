@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Validator;
 use App\Imagem;
 use App\CatImagem;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
 
 class ImagemController extends Controller
 {
@@ -45,14 +47,24 @@ class ImagemController extends Controller
      */
     public function store(Request $request)
     {
+        //$createImage = Imagem::create($request->all());
+        
+        $validator = Validator::make($request->only('imagem'), ['imagem' => 'image']);
+  
+        if($validator->fails() === true) {
+            flash('Todas as imagens devem ser do tipo jpg, jpge, png, ou svg.')->error()->important();
+            return redirect()->route('admin.imagens.create');
+        }
+
         $imagem = new Imagem();
-        $imagem->imagem = $request->file('imagem')->store('public/imagens');
-        $imagem->cats_imagem_id = 1;
+        $imagem->id = $request->id;
+        $imagem->cats_imagem_id = $request->cats_imagem_id;
+        $imagem->imagem = $request->file('imagem')->store('imagens/' . $imagem->id);
+        
         $imagem->save();
+        unset($imagem);
 
         echo "<img src=' " . Storage::url($imagem->imagem) . " '>";
-
-        //var_dump($request->imagem);
     }
 
     /**

@@ -13,11 +13,22 @@ class Imagem extends Model
      * @var array
      */
     protected $fillable = [
-        'imagem'
+        'imagem', 'cats_imagem_id'
     ];
 
     public function user()
     {   
         return $this->belongsTo(CatImagem::class, 'cats_imagem_id', 'id');
+    }
+
+
+    // Não estou utilizando o Cropper
+    public function getUrlImagemAttribute()
+    {
+        if(!empty($this->imagem)){
+             return Storage::url(Cropper::thumb($this->imagem, 500, 500));
+        }
+
+        return '';
     }
 }

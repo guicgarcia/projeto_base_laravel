@@ -25,8 +25,12 @@
                 </div>
         @endforeach
 
+        @include('flash::message')
+
         <form action="{{ route('admin.imagens.store') }}" method="post" enctype="multipart/form-data">
             @csrf
+
+            <input type="hidden" name="cats_imagem_id" value="1">
 
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -34,8 +38,6 @@
                        <input name="imagem" type="file" id="imagem"/> 
                 </div>
             </div>
-
-            -> Select de categoria de imagens <br>
         
             <p>
                 <span class="text-danger">* </span>Campo obrigatório
