@@ -38,7 +38,7 @@
                                         <img src="{{ env('APP_URL') }}/storage/{{ $imagem->imagem }}" alt="" width="100" height="80">
                                     </div>
                                 </td>
-                                <td class="d-none d-sm-table-cell">{{ $imagem->cats_imagem_id }}</td>
+                                <td class="d-none d-sm-table-cell">{{ $imagem->catImagem->name }}</td>
                                 <td class="d-none d-lg-table-cell">{{ $imagem->created_at }}</td>
                                 <td class="text-center">
                                     <span class="d-none d-md-block">

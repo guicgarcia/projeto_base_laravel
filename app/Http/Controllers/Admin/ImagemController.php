@@ -19,7 +19,7 @@ class ImagemController extends Controller
      */
     public function index()
     {
-        $imagens = Imagem::paginate(4);
+        $imagens = Imagem::paginate(10);
         return view('admin.imagens.index', [
             'imagens' => $imagens
         ]);
@@ -33,7 +33,7 @@ class ImagemController extends Controller
     public function create()
     {
         $catImagens = CatImagem::orderBy('id', 'DESC')->get();
-        
+
         return view('admin.imagens.create', [
             'catImagens' => $catImagens
         ]);
@@ -47,7 +47,8 @@ class ImagemController extends Controller
      */
     public function store(Request $request)
     {
-        //$createImage = Imagem::create($request->all());
+        
+        $createImage = Imagem::create($request->all());
         
         $validator = Validator::make($request->only('imagem'), ['imagem' => 'image']);
   
@@ -56,15 +57,18 @@ class ImagemController extends Controller
             return redirect()->route('admin.imagens.create');
         }
 
-        $imagem = new Imagem();
-        $imagem->id = $request->id;
-        $imagem->cats_imagem_id = $request->cats_imagem_id;
-        $imagem->imagem = $request->file('imagem')->store('imagens/' . $imagem->id);
-        
-        $imagem->save();
-        unset($imagem);
+        //$imagem = new Imagem();
+        //$imagem->id = $request->id;
+        //$imagem->cats_imagem_id = $request->cats_imagem_id;
+        $createImage->imagem = $request->file('imagem')->store('imagens/' . $createImage->id);
 
-        echo "<img src=' " . Storage::url($imagem->imagem) . " '>";
+        $createImage->save();
+        unset($createImage);
+
+        flash('Imagem cadastrada com sucesso')->success()->important();
+        return redirect()->route('admin.imagens.index');
+
+        //echo "<img src=' " . Storage::url($imagem->imagem) . " '>";
     }
 
     /**

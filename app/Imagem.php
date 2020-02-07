@@ -16,7 +16,7 @@ class Imagem extends Model
         'imagem', 'cats_imagem_id'
     ];
 
-    public function user()
+    public function catImagem()
     {   
         return $this->belongsTo(CatImagem::class, 'cats_imagem_id', 'id');
     }

@@ -31,10 +31,25 @@
             @csrf
 
             <input type="hidden" name="cats_imagem_id" value="1">
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label><span class="text-danger">*</span> Categoria da Imagem</label>
+                    <select class="form-control">
+                        <option value="0">Informe uma categoria</option>
+                        @foreach($catImagens as $catImagem)
+                             <option value="{{ $catImagem->id }}">
+                                {{ $catImagem->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label><span class="text-danger">*</span> Imagem</label>
+                    <label><span class="text-danger">*</span> Imagem</label><br>
                        <input name="imagem" type="file" id="imagem"/> 
                 </div>
             </div>

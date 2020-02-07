@@ -11,7 +11,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle menu-header" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-                    <img class="rounded-circle" src="{{ env('APP_URL') }}/imagens/logo.png" width="20" height="20"> &nbsp;<span class="d-none d-sm-inline">Usuário</span> 
+                    <img class="rounded-circle" src="{{ env('APP_URL') }}/imagens/logo.png" width="20" height="20"> &nbsp;<span class="d-none d-sm-inline">{{ Auth::user()->name }}</span> 
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#"> <i class="fas fa-user"></i> Perfil</a>
